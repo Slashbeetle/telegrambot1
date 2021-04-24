@@ -15,15 +15,18 @@ updater = Updater(my_secret,use_context="true")
 dispatcher= updater.dispatcher
 
 
+def start(update:Update,context:CallbackContext):
+  bot.send_message(
+      chat_id=update.effective_chat.id,
+      text= "Hi there , welcome to Spam bot........hope you would love my services...",
+  )
+
 def spamfn0(update:Update,context:CallbackContext):
   bot.send_message(
       chat_id=update.effective_chat.id,
       text= "hi hello world",
   )
 
-start_value= CommandHandler('spam',spamfn0)
-dispatcher.add_handler(start_value)
-updater.start_polling()
 
 def spamfn1(update:Update,context:CallbackContext):
   bot.send_message(
@@ -31,9 +34,22 @@ def spamfn1(update:Update,context:CallbackContext):
       text= "hi hello world welcome",
   )
 
+
+start_value= CommandHandler('spam',spamfn0)
+dispatcher.add_handler(start_value)
+updater.start_polling()
+
 start_value= CommandHandler('spam1',spamfn1)
 dispatcher.add_handler(start_value)
 updater.start_polling()
+
+start_value= CommandHandler('start',start)
+dispatcher.add_handler(start_value)
+updater.start_polling()
+
+
+
+
 
 keep_alive()
 token = os.environ.get("token")
